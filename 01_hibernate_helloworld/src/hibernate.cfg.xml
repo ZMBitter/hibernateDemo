@@ -26,6 +26,6 @@
         <property name="hibernate.use_identifier_rollback">true</property>
 
         <!-- 指定关联的hibernate映射文件 -->
-        <mapping resource="com/zm/hibernate/news.hbm.xml"/>
+        <mapping resource="com/zm/hibernate/news.hbm.xml "/>
     </session-factory>
 </hibernate-configuration>

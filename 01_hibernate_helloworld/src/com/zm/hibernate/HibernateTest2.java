@@ -4,11 +4,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.jdbc.Work;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class HibernateTest2 {
     private SessionFactory sessionFactory;
@@ -160,7 +164,7 @@ public class HibernateTest2 {
     *  2.如何能让update方法不再盲目地发送update语句？
     *     在*.hbm.xml文件的class节点设置select-before-update=true(默认为false），通常不设置此属性
     *  3、若数据表中没有对应的记录，但是又调用了update方法，则会抛出异常
-    *  4.当update()方法关联一个游离对象时，如果在session的缓存中已经存在相同的OID,则会抛出异常。因为
+    *  4.当update()方法关联一个游离对象时，如果在session的缓存中已经存在相同的OID持久化对象,则会抛出异常。因为
     *  在session缓存中，不存在相同OID的对象
     * */
     @Test
@@ -215,5 +219,15 @@ public class HibernateTest2 {
         news2.setTitle("BB");
 
         session.evict(news1);
+    }
+
+    @Test
+    public void testDoWork(){
+        session.doWork(new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                //调用存储过程
+            }
+        });
     }
 }

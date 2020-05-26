@@ -17,9 +17,9 @@ public class HibernateTest {
         //1.1创建Configuration对象：对应Hibernate的基本配置信息和对象关系映射信息
         Configuration configuration = new Configuration().configure();
         //hibernate 3中sessionFactory的创建
-       // sessionFactory = configuration.buildSessionFactory();
+//        sessionFactory = configuration.buildSessionFactory();
 
-        //hibernate 4中sessionFactory的创建
+        //hibernate 4.x中sessionFactory的创建
         ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
