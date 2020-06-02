@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+        <!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zm.bean">
+
+<class name="Worker" table="worker" schema="hibernate_db" select-before-update="true">
+    <id name="id" type="java.lang.Integer">
+        <column name="id" />
+        <!-- 主键的生成方式 -->
+        <generator class="native"></generator>
+    </id>
+    <property name="name" type="java.lang.String">
+        <column name="name" />
+    </property>
+    <!--映射组成关系-->
+    <component name="pay" class="com.zm.bean.Pay">
+        <!--指定组成关系的组件的属性-->
+        <parent name="worker"/> <!--<用于指定组件属性所属的整体类-->
+        <property name="monthPay" column="monthPay"></property>
+        <property name="yearPay" column="yearPay"></property>
+        <property name="vocationWithPay" column="vocationWithPay"></property>
+    </component>
+</class>
+</hibernate-mapping>
