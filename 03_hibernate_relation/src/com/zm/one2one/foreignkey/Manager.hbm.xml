@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.zm.one2one.foreignkey.Manager" table="MANAGERS">
+      <id name="mangerId" type="java.lang.Integer">
+          <column name="manger_id"/>
+          <generator class="native"/>
+      </id>
+      <property name="managerName" type="java.lang.String">
+          <column name="manager_name"/>
+      </property>
+      <!--映射1-1的关联关系：在对应的数据表中已经有外键了，当前持久化类使用one-to-one进行映射-->
+      <one-to-one name="dept" class="com.zm.one2one.foreignkey.Department"
+      property-ref="manager"></one-to-one>
+  </class>
+</hibernate-mapping>

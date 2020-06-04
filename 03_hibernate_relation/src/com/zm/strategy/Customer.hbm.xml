@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+        <!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zm.strategy">
+    <!--类级别检索策略：只针对load有效。通常使用默认值-->
+<class name="Customer" table="CUSTOMERS" >
+    <id name="customerId" type="java.lang.Integer">
+        <column name="customer_id"/>
+        <generator class="native"/>
+    </id>
+    <property name="customerName" type="java.lang.String">
+        <column name="customer_name"/>
+    </property>
+    <set name="orders" table="ORDERS" inverse="true" batch-size="2" fetch="subselect">
+        <!-- 指定关联的表中的外键列的名字 -->
+        <key column="CUSTOMER_ID"></key>
+        <!-- 指定映射类型 -->
+        <one-to-many class="Order"/>
+    </set>
+</class>
+</hibernate-mapping>
